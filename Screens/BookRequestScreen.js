@@ -49,7 +49,7 @@ export default class BookRequestScreen extends Component {
   addRequest = async (bookName, reasonToRequest) => {
     var userId = this.state.userId
     var randomRequestId = this.createUniqueId()
-    //new lines 47,48
+    //new lines 53
     var books = await BookSearch.searchbook(bookName, 'AIzaSyBNbOk70ccPT3tUW0WrKXKi48HDMDKY4SM')
     
     db.collection('requested_books').add({
@@ -63,7 +63,7 @@ export default class BookRequestScreen extends Component {
       //new
       image_link: books.data[0].volumeInfo.imageLinks.smallThumbnail
     })
-    //new code
+   
     await this.getBookRequest()
     db.collection('users').where("email_Id", "==", userId)
       .get().then((snapshot) => {
@@ -81,7 +81,7 @@ export default class BookRequestScreen extends Component {
 
     return Alert.alert("Book Requested Successfully")
   }
-  //new
+  
   receivedBooks = (bookName) => {
     var userId = this.state.userId
     var requestId = this.state.requestId
@@ -92,7 +92,7 @@ export default class BookRequestScreen extends Component {
       bookStatus: "received"
     })
   }
-  //new
+ 
 
   getIsBookRequestActive() {
     db.collection('users')
@@ -109,7 +109,7 @@ export default class BookRequestScreen extends Component {
       })
   }
 
-  //new
+
   getBookRequest = () => {
     var bookRequest = db.collection('requested_books')
       .where('user_id', "==", this.state.userId)
@@ -129,7 +129,7 @@ export default class BookRequestScreen extends Component {
       })
   }
 
-  //new
+  
   sendNotification = () => {
     db.collection('users').where('email_Id', '==', this.state.userId).get()
       .then((snapshot) => {
@@ -184,7 +184,7 @@ export default class BookRequestScreen extends Component {
 
 
   }
-
+//new 
   async getBooksFromApi(bookName) {
     this.setState({ bookName: bookName })
     if (bookName.length > 2) {
